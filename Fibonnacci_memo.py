@@ -1,5 +1,6 @@
 from datetime import datetime
-start = datetime.now()
+
+
 # Fibonnacci sequence with memoization, enter sequence number to caculate
 def fib(n, memo):
     if memo[n] is not None:
@@ -17,6 +18,8 @@ def fib_memo(n):
     memo = [None] * (n + 1)
     return fib(n, memo)
 
+
+start = datetime.now()
 if __name__ == '__main__':
     print('The result is: ' + str(fib_memo(int(input('Enter Fibonnacci sequence number: ')))))
     print(datetime.now()-start)

@@ -1,5 +1,7 @@
 from datetime import datetime
-start = datetime.now()
+
+
+
 # Fibonnacci sequence, enter sequence number to caculate
 def fib(n):
     if 0 < n == 1 or 0 < n == 2:
@@ -10,8 +12,9 @@ def fib(n):
     for i in range(3, n+1):
         memo[i] = memo[i-1] + memo[i-2]
     return memo[n]
-   
 
+
+start = datetime.now()
 if __name__ == '__main__':
     print('The result is: ' + str(fib(int(input('Enter Fibonnacci sequence number: ')))))
     print(datetime.now()-start)

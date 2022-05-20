@@ -1,5 +1,6 @@
 from datetime import datetime
-start = datetime.now()
+
+
 # Fibonnacci sequence, enter sequence number to caculate
 def fib(n):
     try:
@@ -15,6 +16,7 @@ def fib(n):
         print("No negative numbers please.")
     
 
+start = datetime.now()
 if __name__ == '__main__':
     print('The result is: ' + str(fib(int(input('Enter Fibonnacci sequence number: ')))))
     print(datetime.now()-start)
