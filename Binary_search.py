@@ -19,11 +19,18 @@ def search(list, number):
     return -1
 
 
-if __name__ == '__main__':
-    print(search(array, target))
-
 # solve a shifted binary search
 
 shifted_array = [8, 9, 11, 13, -2, 3, 4, 7]
 
 
+def shifted_search(list, number):
+    left = 0
+    right = len(list) - 1
+    if list[left] < list[right]:
+        search(list, number)
+
+
+
+if __name__ == '__main__':
+    print(shifted_search(array, target))
