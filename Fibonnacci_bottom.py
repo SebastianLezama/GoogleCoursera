@@ -1,7 +1,7 @@
 from datetime import datetime
 
 
-# Fibonnacci sequence, enter sequence number to caculate
+# Fibonacci sequence, enter sequence number to caculate
 def fib(n):
     if 0 < n == 1 or 0 < n == 2:
         return 1
