@@ -2,12 +2,10 @@
 # if not it should return -1.
 
 
-
-
 def search(list, number):
     left = 0
     right = len(list) - 1
-    while left < right:
+    while left <= right:
         middle = int((left + right) / 2)
         if list[middle] == number:
             return middle
@@ -32,20 +30,50 @@ shifted_array5 = [8, 9, 11, 13, -2, 3, 4, 7]
 shifted_array6 = [7, 8, 9, 11, 13, -2, 3, 4]
 shifted_array7 = [4, 7, 8, 9, 11, 13, -2, 3]
 shifted_array8 = [3, 4, 7, 8, 9, 11, 13, -2]
-
-
-
 array = [-2, 3, 4, 7, 8, 9, 11, 13]
-target = 13
+target = -2
+
+
+def new_shifted_search(list, number):
+    left = 0
+    right = len(list) - 1
+
+    while left <= right:
+        middle = (left + right) // 2
+        if list[middle] == number:
+            return middle
+        
+        # Left part of the array
+        if list[left] <= list[middle]:
+            print('A')
+            if number > list[middle] or number < list[left]:
+                print('a')
+                left = middle + 1
+            else:
+                print('b')
+                right = middle - 1
+        else:
+            print('B')
+            if number < list[middle] or number > list[right]:
+                print('a')
+                right = middle - 1
+            else:
+                print('b')
+                left = middle + 1
+                print(left)
+    return -1
+
 
 
 def shifted_search(list, number):
     left = 0
     right = len(list) - 1
+
     while list[left] < list[right]:
         return search(list, number)
+
     while list[left] > list[right]:
-        middle = int((left + right) / 2)
+        middle = (left + right) // 2
         if list[middle] == number:
             return middle
         elif list[middle] > list[right]:
@@ -57,6 +85,7 @@ def shifted_search(list, number):
                 new_list = list[left :] + list [0 : left]
                 print(new_list)
                 return search(new_list, number) + left
+
         elif list[middle] < list[right]:
             print('B')
             if number == list[left]:
@@ -72,4 +101,4 @@ def shifted_search(list, number):
 
 
 if __name__ == '__main__':
-    print(shifted_search(shifted_array3, target))
+    print(new_shifted_search(shifted_array5, target))
