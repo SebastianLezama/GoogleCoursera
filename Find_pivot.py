@@ -41,6 +41,6 @@ def find_pivot(list):
 
 
 if __name__ == '__main__':
-    print(find_pivot(shifted_array7))
+    print(find_pivot(shifted_array2))
         
 
