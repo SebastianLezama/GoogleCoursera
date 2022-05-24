@@ -52,6 +52,7 @@ def new_shifted_search(list, number):
             else:
                 print('b')
                 right = middle - 1
+        # Right part of the array
         else:
             print('B')
             if number < list[middle] or number > list[right]:
