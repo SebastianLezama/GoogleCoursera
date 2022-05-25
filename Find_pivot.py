@@ -17,12 +17,12 @@ def find_pivot(list):
     while left <= right:
         mid = (left + right) // 2
         
-        if list[mid] < list[mid - 1]:
+        if list[mid] <= list[mid - 1]:
             return mid
         if list[mid] > list[mid + 1]:
             return mid + 1
             
-
+        # Left side of the array
         if list[right] < list[left] > list[mid]:
             print('A')
             right = mid - 1
@@ -30,6 +30,7 @@ def find_pivot(list):
                 print('a')
                 return mid  
         else:
+        # Right side of the array
             if list[left] > list[right] < list[mid]:
                 print('B')
                 left = mid + 1
@@ -41,6 +42,6 @@ def find_pivot(list):
 
 
 if __name__ == '__main__':
-    print(find_pivot(shifted_array2))
+    print(find_pivot(shifted_array5))
         
 
