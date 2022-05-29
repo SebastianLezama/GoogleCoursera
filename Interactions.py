@@ -66,3 +66,22 @@ for row in csv_f:
   print("Name: {}, Phone: {}, Role: {}".format(name, phone, role))
 f.close()
 
+# Write to csv with the csv.writer funtion
+# You can use csv.DictWriter to write from a dict with keys and asign them to the key values
+# Writing with the writeheader() function
+
+file_data = [['name', 'phone', 'role'],
+  ['Sabrina Green', '802-867-5309', 'System Administrator'],
+  ['Eli Jones', '683-348-1127', 'IT Specialist'],
+  ['Melody Daniels', '846-687-7436', 'Programmer'],
+  ['Charlie Rivera', '698-746-3357', 'Web Developer']
+  ]
+
+with open('csv_file.txt', 'w', newline='') as file:
+  writer = csv.writer(file)
+  writer.writerows(file_data)
+with open('csv_file.txt') as file:
+  reader = csv.DictReader(file)
+  for row in reader:
+    print("Name: {}, Phone: {}, Role: {}".format(row['name'], row['phone'], row['role']))
+
