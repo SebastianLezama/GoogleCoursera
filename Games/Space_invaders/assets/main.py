@@ -109,7 +109,7 @@ class Player(Ship):
                 self.lasers.remove(laser)
             else:
                 for obj in objs:
-                    if laser.collision(obj):
+                    if laser.collision(obj) == True and obj == obj.off_screen(HEIGHT):
                         objs.remove(obj)
                         if laser in self.lasers:
                             self.lasers.remove(laser)
@@ -151,6 +151,9 @@ class Enemy(Ship):
 
     def move(self, vel):
         self.y += vel
+
+    def off_screen(self, height):
+        return not self.y <= height and self.y >= 0
 
 
 def collide(obj1, obj2):

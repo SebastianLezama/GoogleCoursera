@@ -36,7 +36,7 @@ def new_directory(directory, filename):
 
   # Create the new file inside of the new directory
   os.chdir(directory)
-  with open (filename, 'w') as file:
+  with open(filename, 'w') as file:
     pass
 
   # Return the list of files in the new directory
@@ -45,5 +45,24 @@ def new_directory(directory, filename):
 print(new_directory("PythonPrograms", "script.py"))
 
 os.remove('script.py')
-# os.chdir('../')
-os.remove(parent_directory('PythonPrograms'))
+os.chdir('../')
+os.chdir('GoogleCoursera')
+# print(os.getcwd())
+# os.remove(parent_directory('PythonPrograms'))
+
+import csv
+
+file_text = ("Sabrina Green,802-867-5309,System Administrator\n" + 
+              "Eli Jones,683-348-1127,IT Specialist\n" +
+              "Melody Daniels,846-687-7436,Programmer\n" +
+              "Charlie Rivera,698-746-3357,Web Developer"
+              )
+with open('csv_file.txt', 'w') as file:
+  file.write(file_text)
+f = open("csv_file.txt")
+csv_f = csv.reader(f)
+for row in csv_f:
+  name, phone, role = row
+  print("Name: {}, Phone: {}, Role: {}".format(name, phone, role))
+f.close()
+
