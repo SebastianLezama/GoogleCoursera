@@ -1,6 +1,7 @@
 import os
 import datetime
 
+
 def file_date(filename):
   # Create the file in the current directory
   with open(filename, 'w'):
@@ -25,6 +26,7 @@ def script(filename):
         file.write(comments)
     filesize = os.path.getsize(filename)
     return filesize
+
 
 print(script('Program.py'))
 os.remove('Program.py')
@@ -85,3 +87,30 @@ with open('csv_file.txt') as file:
   for row in reader:
     print("Name: {}, Phone: {}, Role: {}".format(row['name'], row['phone'], row['role']))
 
+# Regular Expressions
+# .^$?*[] special characters. \ escape character
+# . Any character
+# ^ Beginning of a word, $ end of a word
+# + Matches one or more occurrences of the character that comes before it
+# \w matches letters, numbers and underscores
+# ? goes before expression, optional
+# () capturing groups, can be indexed, i[0] is the whole tuple then +=
+# \b boundary, match lenght of expression; {n} numerical repetition can be a range
+
+import re
+
+def repeating_letter_a(text):
+  result = re.search(r"[aA].*[aA]", text)
+  return result != None
+
+print(repeating_letter_a("banana")) # True
+print(repeating_letter_a("pineapple")) # False
+
+reg = (r"[\w*][\s*]\w*")
+
+# it starts with an uppercase letter, followed by
+# at least some lowercase letters or a space, and ends with
+#  a period, question mark, or exclamation point.
+result = re.search(r"^[A-Z][a-z ]*[\.\?!]$", text)
+
+pattern = r"^[a-zA-Z][a-zA-Z\.-+_]*[\..]$"
