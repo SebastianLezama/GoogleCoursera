@@ -1,6 +1,8 @@
 import os
 import datetime
+import re 
 
+""""
 
 def file_date(filename):
   # Create the file in the current directory
@@ -111,6 +113,53 @@ reg = (r"[\w*][\s*]\w*")
 # it starts with an uppercase letter, followed by
 # at least some lowercase letters or a space, and ends with
 #  a period, question mark, or exclamation point.
-result = re.search(r"^[A-Z][a-z ]*[\.\?!]$", text)
+#result = re.search(r"^[A-Z][a-z ]*[\.\?!]$")
 
 pattern = r"^[a-zA-Z][a-zA-Z\.-+_]*[\..]$"
+
+# subprocess module
+import subprocess
+
+result = subprocess.run(["host", "8,8,8,8"], capture_output=True)
+print(result.returncode)
+print(result.stdout.decode().split()) # decodes the stdout with u8
+
+# prepare new env and set path var
+
+my_env = os.environ.copy()
+my_env["PATH"] = os.pathsep.join(["/opt/myapp/", my_env['PATH']])
+
+result = subprocess.run(["myapp"], env=my_env)
+print(result[1])
+
+# Handling log file, for line in to avoid RAM buildup
+import sys
+
+logfile = sys.argv[1]
+usernames = {}
+# checks for users to started a CRON job
+with open(logfile) as f:
+  for line in f:
+    if "CRON" not in line:   ^([A-Z][a-z]* \d \d*:\d{2}:\d{2})
+      continue
+    pattern = r"USER \((\w+)\)$"
+    result = re.search(pattern, line)
+    if result is None:
+      continue
+    name = result[1]
+    usernames[name] = usernames.get(name, 0) + 1
+print(usernames)
+"""
+
+def show_time_of_pid(line):
+  pattern = (r"^([A-Z][a-z]* \d{,2} \d*:\d{2}:\d{2})[\w.+-= ]*\[(\d*)\]")
+  result = re.search(pattern, line)
+  if result == None:
+    return ''
+  return result[1] + " pid:" + result[2]
+
+# Dict to count appearences of strings
+
+usernames = {}
+name = "user"
+usernames[name] = usernames.get(name, 0) + 1
