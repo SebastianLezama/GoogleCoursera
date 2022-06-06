@@ -2,7 +2,7 @@ import os
 import datetime
 import re 
 
-""""
+# Unaware
 
 def file_date(filename):
   # Create the file in the current directory
@@ -56,11 +56,12 @@ os.chdir('GoogleCoursera')
 
 import csv
 
-file_text = ("Sabrina Green,802-867-5309,System Administrator\n" + 
-              "Eli Jones,683-348-1127,IT Specialist\n" +
-              "Melody Daniels,846-687-7436,Programmer\n" +
-              "Charlie Rivera,698-746-3357,Web Developer"
-              )
+file_text = (
+  "Sabrina Green,802-867-5309,System Administrator\n" + 
+  "Eli Jones,683-348-1127,IT Specialist\n" +
+  "Melody Daniels,846-687-7436,Programmer\n" +
+  "Charlie Rivera,698-746-3357,Web Developer"
+)
 with open('csv_file.txt', 'w') as file:
   file.write(file_text)
 f = open("csv_file.txt")
@@ -92,7 +93,7 @@ with open('csv_file.txt') as file:
 # Regular Expressions
 # .^$?*[] special characters. \ escape character
 # . Any character
-# ^ Beginning of a word, $ end of a word
+# ^ Beginning of a line, $ end of a line
 # + Matches one or more occurrences of the character that comes before it
 # \w matches letters, numbers and underscores
 # ? goes before expression, optional
@@ -140,7 +141,7 @@ usernames = {}
 # checks for users to started a CRON job
 with open(logfile) as f:
   for line in f:
-    if "CRON" not in line:   ^([A-Z][a-z]* \d \d*:\d{2}:\d{2})
+    if "CRON" not in line:
       continue
     pattern = r"USER \((\w+)\)$"
     result = re.search(pattern, line)
@@ -149,7 +150,7 @@ with open(logfile) as f:
     name = result[1]
     usernames[name] = usernames.get(name, 0) + 1
 print(usernames)
-"""
+
 
 def show_time_of_pid(line):
   pattern = (r"^([A-Z][a-z]* \d{,2} \d*:\d{2}:\d{2})[\w.+-= ]*\[(\d*)\]")
