@@ -10,11 +10,11 @@ im_format = '.PNG'
 def imRotateResizeJpg(source, dest, size, rotation, format): # Rotates and resizes as PNG
     for i in os.listdir(source):
         out_file = str(os.path.splitext(i)[0] + format)
-        print("Filename: " + i)
         os.chdir(source)
         if not os.path.isdir(i):
             if i != out_file:
                 try:
+                    print("Filename: " + i)
                     with Image.open(source + i) as im:
                         os.chdir(dest)
                         im.resize(size).rotate(rotation).save(out_file)
@@ -27,8 +27,7 @@ def imRotateResizeJpg(source, dest, size, rotation, format): # Rotates and resiz
                 print("File already formated")
                 print('------------------------------------')
         else:
-            print("This is a directory")
-            print('------------------------------------')
+            continue
 
 
 def main():
