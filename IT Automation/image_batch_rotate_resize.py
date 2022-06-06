@@ -21,6 +21,9 @@ def imRotateResizeJpg(source, dest, size, rotation, format): # Rotates and resiz
             except OSError:
                 print("Couldn't save file")
                 print('------------------------------------')
+        else:
+            print("File already formated")
+            print('------------------------------------')
 
 
 def main():
