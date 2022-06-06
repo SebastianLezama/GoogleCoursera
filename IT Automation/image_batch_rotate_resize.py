@@ -11,18 +11,23 @@ def imRotateResizeJpg(source, dest, size, rotation, format): # Rotates and resiz
     for i in os.listdir(source):
         out_file = str(os.path.splitext(i)[0] + format)
         print("Filename: " + i)
-        if i != out_file:
-            try:
-                with Image.open(source + i) as im:
-                    os.chdir(dest)
-                    im.resize(size).rotate(rotation).save(out_file)
-                    print("Saved as: " + dest + out_file)
+        os.chdir(source)
+        if not os.path.isdir(i):
+            if i != out_file:
+                try:
+                    with Image.open(source + i) as im:
+                        os.chdir(dest)
+                        im.resize(size).rotate(rotation).save(out_file)
+                        print("Saved as: " + dest + out_file)
+                        print('------------------------------------')
+                except OSError:
+                    print("Couldn't save file")
                     print('------------------------------------')
-            except OSError:
-                print("Couldn't save file")
+            else:
+                print("File already formated")
                 print('------------------------------------')
         else:
-            print("File already formated")
+            print("This is a directory")
             print('------------------------------------')
 
 
