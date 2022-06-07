@@ -164,3 +164,32 @@ def show_time_of_pid(line):
 usernames = {}
 name = "user"
 usernames[name] = usernames.get(name, 0) + 1
+
+import json
+
+
+def convertToJson(people): # Converts list of dict into json
+  with open('people.json', 'w') as people_json:
+    json.dump(people, people_json, indent=2)
+
+
+import yaml
+
+def convertToYaml(people): # Converts list of dict into YAML
+  with open('people.yaml', 'w') as people_yaml:
+    yaml.safe_dump(people, people_yaml)
+
+
+import requests
+
+
+url = 'https://wwwgoogle.com'
+response = requests.get(url)
+response.ok # True
+response.status_code # 200
+
+if not response.ok:
+  raise Exception("GET failed with status code {}".format(response.status_code))
+response.raise_for_status() # Raises an HTTPError if response not ok
+
+
