@@ -23,7 +23,7 @@ def writeToTxt():
         json.dump(people, f, indent=2)
 
 
-cwdir = 'c:\\Users\\Sebastian Lezama\\GoogleCoursera\\IT Automation\\'
+cwdir = 'c:\\Users\\Sebastian Lezama\\GoogleCoursera\\IT Automation\\Text_files\\'
 
 def readFromTxt(file, dir):
     os.chdir(dir)
@@ -36,14 +36,18 @@ def getDb(source):
     os.chdir(source)
     for i in os.listdir(source):
         #resp = requests.get(url)
-        resp = requests.post(url, json=readFromTxt(i, source))
-        print(resp.request.body)
+        try:
+            resp = requests.post(url, json=readFromTxt(i, source))
+            print(resp.request.body)
+        except json.decoder.JSONDecodeError:
+            continue
 
         #print(requests.post(url, json=readFromTxt(i)))
 
 
 def main():
     getDb(cwdir)
+    pass
 
 
 if __name__ == '__main__':
