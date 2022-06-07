@@ -192,4 +192,11 @@ if not response.ok:
   raise Exception("GET failed with status code {}".format(response.status_code))
 response.raise_for_status() # Raises an HTTPError if response not ok
 
+par = {"search": "grey kitten", "max_results": 15}
+res = requests.get(url, params=par) # ?search=grey+kitten&max_results=15
+print(response.request.url)
 
+p = {"descripion": "white kitten", "name": "Snowball", "age_months": 6}
+response = requests.post(url, data=p)
+print(response.request.body) # 'description=white+kitten&name=Snowball&age_months=6'
+response = requests.post(url, json=p) # Sends data from dict as JSON
