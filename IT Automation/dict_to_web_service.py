@@ -2,14 +2,10 @@ import os
 import requests
 import json
 
-"""
-Convert .txt files into dict; then make a http post
-"""
 
-#data = {}
-# response = requests.get(url)
-# response.raise_for_status()
-# response = requests.post(url, json=data)
+""" Exercise N2
+Convert .txt files into dict; then make a http post.
+"""
 
 
 def write_to_txt(l):
@@ -27,13 +23,12 @@ def read_from_txt(file, dir):
 
 url = 'https://www.google.com'
 cwdir = 'c:\\Users\\Sebastian Lezama\\GoogleCoursera\\IT Automation\\Text_files\\'
-source_path = ''
 
 
-def get_db(source): # Reads file and appends dict into list
+# Reads file and appends dict into list
+def batch_db_to_web_service(source): 
     os.chdir(source)
     keys = ['title', 'name', 'date', 'feedback']
-    list_of_dict = []
     for file in os.listdir(source):
         print(file)
         data_dict = {}
@@ -44,25 +39,25 @@ def get_db(source): # Reads file and appends dict into list
                 raw_feedback.append(i)
             for index in range(len(raw_feedback)):
                 data_dict[keys[index]] = raw_feedback[index]
-            list_of_dict.append(data_dict)
-    return list_of_dict
+        data = data_to_json(data_dict)
+        post_request(url, data)
 
 
-def get_post_json(list): # Converts list of dict into json
+# Converts list of dict into json
+def data_to_json(list): 
         post_json = json.dumps(list, indent=2)
         return post_json
 
 
-def post_request(url, d):
+def post_request(url, d): #
     resp = requests.post(url, data=d)
     print(resp.status_code)
     print(resp.request.body)
 
 
 def main():
-    list = get_db(cwdir)
-    data = get_post_json(list)
-    post_request(url, data)
+    batch_db_to_web_service(cwdir)
+
 
 
 if __name__ == '__main__':
