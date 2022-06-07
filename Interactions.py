@@ -172,6 +172,10 @@ def convertToJson(people): # Converts list of dict into json
   with open('people.json', 'w') as people_json:
     json.dump(people, people_json, indent=2)
 
+def loadFromJson():
+  with open('people_json', 'r') as people_json:
+    people = json.load(people_json)
+
 
 import yaml
 
@@ -183,7 +187,7 @@ def convertToYaml(people): # Converts list of dict into YAML
 import requests
 
 
-url = 'https://wwwgoogle.com'
+url = 'https://www.google.com'
 response = requests.get(url)
 response.ok # True
 response.status_code # 200
