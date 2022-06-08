@@ -204,3 +204,18 @@ p = {"descripion": "white kitten", "name": "Snowball", "age_months": 6}
 response = requests.post(url, data=p)
 print(response.request.body) # 'description=white+kitten&name=Snowball&age_months=6'
 response = requests.post(url, json=p) # Sends data from dict as JSON
+
+from email.message import EmailMessage
+
+message = EmailMessage()
+sender = "me@example.com"
+recipient = "you@example.com"
+message['From'] = sender
+message['To'] = recipient
+message['Subject'] = 'Greeting from {} to {}.'.format(sender, recipient)
+body = """Hey there,
+
+I'm learning Python!"""
+message.set_content(body)
+
+
