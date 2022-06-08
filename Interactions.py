@@ -205,6 +205,7 @@ response = requests.post(url, data=p)
 print(response.request.body) # 'description=white+kitten&name=Snowball&age_months=6'
 response = requests.post(url, json=p) # Sends data from dict as JSON
 
+
 from email.message import EmailMessage
 
 message = EmailMessage()
@@ -231,4 +232,18 @@ with open(attachment_path, 'rb') as ap:
                         maintype=mime_type,
                         subtype=mime_subtype,
                         filename=attachment_filename)
+
+
+import smtplib
+
+mail_server = smtplib.SMTP('localhost')
+another_mail_server = smtplib.SMTP_SSL('smtp.example.com')
+another_mail_server.set_debuglevel(1) # can set both to see smtp msgs being sent
+
+import getpass
+
+mail_pass = getpass.getpass('Password?') # gets pass from input
+mail_server.login(sender, mail_pass) # returns tuple of status, u need to handle smtp auth error exception
+mail_server.send_message(message) # returns dict of unreached receipients
+mail_server.quit()
 
