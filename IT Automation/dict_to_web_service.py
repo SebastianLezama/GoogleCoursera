@@ -33,9 +33,10 @@ def batch_db_to_web_service(source):
         print(file)
         data_dict = {}
         raw_feedback = []
-        with open(file, 'r', newline='') as f:
+        with open(file, 'r') as f:
             lines = f.read().splitlines()
             for i in lines:
+                print(i)
                 raw_feedback.append(i)
             for index in range(len(raw_feedback)):
                 data_dict[keys[index]] = raw_feedback[index]
@@ -50,7 +51,7 @@ def data_to_json(list):
 
 
 def post_request(url, d): #
-    resp = requests.post(url, data=d)
+    resp = requests.post(url, json=d)
     print(resp.status_code)
     print(resp.request.body)
 
