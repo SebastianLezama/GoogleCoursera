@@ -247,3 +247,10 @@ mail_server.login(sender, mail_pass) # returns tuple of status, u need to handle
 mail_server.send_message(message) # returns dict of unreached receipients
 mail_server.quit()
 
+from reportlab.platypus import SimpleDocTemplate, Paragraph, Spacer, Table, Image
+from reportlab.lib.styles import getSampleStyleSheet
+
+report = SimpleDocTemplate('/tmp/reoprt.pdf')
+style = getSampleStyleSheet()
+
+
