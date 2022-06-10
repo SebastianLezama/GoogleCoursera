@@ -1,3 +1,4 @@
+"""
 import os
 import datetime
 import re 
@@ -204,9 +205,14 @@ p = {"descripion": "white kitten", "name": "Snowball", "age_months": 6}
 response = requests.post(url, data=p)
 print(response.request.body) # 'description=white+kitten&name=Snowball&age_months=6'
 response = requests.post(url, json=p) # Sends data from dict as JSON
+"""
 
-
+import os
 from email.message import EmailMessage
+
+print(os.getcwd())
+os.chdir('GoogleCoursera')
+print(os.getcwd())
 
 message = EmailMessage()
 sender = "me@example.com"
@@ -222,7 +228,7 @@ message.set_content(body)
 import os.path
 import mimetypes
 
-attachment_path = '/tmp/example.png'
+attachment_path = './report.pdf' # example.png
 attachment_filename = os.path.basename(attachment_path)
 mime_type, _ = mimetypes.guess_type(attachment_path) # image/png -> type/subtype
 mime_type, mime_subtype = mime_type.split('/', 1) # image png
@@ -233,12 +239,14 @@ with open(attachment_path, 'rb') as ap:
                         subtype=mime_subtype,
                         filename=attachment_filename)
 
+print(message)
 
 import smtplib
 
-mail_server = smtplib.SMTP('localhost')
-another_mail_server = smtplib.SMTP_SSL('smtp.example.com')
-another_mail_server.set_debuglevel(1) # can set both to see smtp msgs being sent
+mail_server = smtplib.SMTP_SSL('smtp.gmail.com', 465)
+port = 465
+# another_mail_server = smtplib.SMTP_SSL('smtp.example.com')
+# another_mail_server.set_debuglevel(1) # can set both to see smtp msgs being sent
 
 import getpass
 
@@ -250,6 +258,9 @@ mail_server.quit()
 from reportlab.platypus import SimpleDocTemplate, Paragraph, Spacer, Table, Image
 from reportlab.lib.styles import getSampleStyleSheet
 from reportlab.lib import colors
+from reportlab.graphics.shapes import Drawing
+from reportlab.graphics.charts.piecharts import Pie
+
 
 fruit = {
   "apples" : 8,
@@ -258,7 +269,8 @@ fruit = {
   "oranges" : 6
 }
 
-report = SimpleDocTemplate('/tmp/report.pdf')
+
+report = SimpleDocTemplate('./report.pdf')
 styles = getSampleStyleSheet()
 report_title = Paragraph("A Complete Inventory of My Fruit", styles['h1'])
 table_data = []
@@ -268,7 +280,15 @@ for k, v in fruit.items():
 table_style = [('GRID', (0,0), (-1,-1), 1, colors.black)]
 report_table = Table(data=table_data, style=table_style, hAlign='LEFT')
 
+report_pie = Pie(width=3, height=3)
+report_pie.data = []
+report_pie.labels = []
+for fruit_name in sorted(fruit):
+  report_pie.data.append(fruit[fruit_name])
+  report_pie.labels.append(fruit_name)
 
+report_chart = Drawing()
+report_chart.add(report_pie)
 
-report.build([report_title, report_table])
+report.build([report_title, report_table, report_chart])
 
