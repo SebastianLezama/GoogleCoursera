@@ -7,9 +7,13 @@ import os
 import reports
 import json
 from operator import itemgetter
+from reportlab.graphics.charts.piecharts import Pie
 
 
 car_sales = 'C:\\Users\\Sebastian Lezama\\GoogleCoursera\\IT Automation\\Text_files\\car_sales.json'
+
+sender = 'automation@example.com'
+recipient = '<user>@example.com'
 
 def process_data():
     per_car_sale = {}
@@ -45,6 +49,7 @@ def process_data():
                 car_sale['price'], 
                 car_sale['total_sales']
                 ])
+
         # Sorting and formatting strings
         pdf_table = sorted(pdf_table, key=itemgetter(3), reverse=True)
         pdf_table.insert(0, pdf_col)
@@ -61,26 +66,18 @@ def process_data():
         print(summary_car)
         print(mp_year)
         
+    subject = 'Sales summary for last month'
+    nl = '\n'
+    email_text = summary_string + nl + summary_car + nl + mp_year
     br = "<br/>"
     pdf_text= summary_string + br + summary_car + br + mp_year
-    reports.generate(
-        "C:\\Users\\Sebastian Lezama\\GoogleCoursera\\IT Automation\\Text_files\\cars.pdf", 
-        "A Complete Inventory of My Fruit", pdf_text, pdf_table)
-
-
-# calculate most popular car_year (viejitud) across all make/models
-# make an item sum per car_year, then return highest
-
-    total_sales = 0
-    summary = []
-"""
-    sender = "automation@example.com"
-    receiver = "{}@example.com".format(os.environ.get('USER'))
-    subject = "List of Fruits"
-    body = "Hi\n\nI'm sending an attachment with all my fruit."
-    message = emails.generate(sender, receiver, subject, body, "/tmp/report.pdf")
+    att_path = "C:\\Users\\Sebastian Lezama\\GoogleCoursera\\IT Automation\\Text_files\\cars.pdf"
+    reports.generate(att_path, subject, pdf_text, pdf_table)
+    message = emails.generate(sender, recipient, subject, email_text, att_path)
     emails.send(message)
-"""
+
+
+
 
 
 if __name__ == '__main__':
