@@ -7,11 +7,11 @@ import os
 import reports
 import json
 from operator import itemgetter
+from reportlab.graphics.shapes import Drawing
 from reportlab.graphics.charts.piecharts import Pie
-
+from reportlab.graphics.charts.barcharts import VerticalBarChart
 
 car_sales = 'C:\\Users\\Sebastian Lezama\\GoogleCoursera\\IT Automation\\Text_files\\car_sales.json'
-
 sender = 'automation@example.com'
 recipient = '<user>@example.com'
 
@@ -52,6 +52,30 @@ def process_data():
 
         # Sorting and formatting strings
         pdf_table = sorted(pdf_table, key=itemgetter(3), reverse=True)
+        # Pie chart
+        report_pie = Pie(width=3, height=3)
+        report_pie.data = []
+        report_pie.labels = []
+        report_pie.width = 120
+        report_pie.height = 120
+        report_pie.checkLabelOverlap = True
+        report_pie.sideLabels = True
+        report_pie.simpleLabels = False
+        report_pie.x = 120
+        report_pie.y = 70
+        for car in pdf_table:
+            report_pie.data.append(car[3])
+            report_pie.labels.append(car[1])
+        report_chart = Drawing()
+        report_chart.add(report_pie)
+
+        # Bar chart
+        print(sales)
+        bar_chart = VerticalBarChart()
+        for i in range(1,11):
+            bar_chart.data.append(sales[i])
+            bar_chart.categoryAxis.categoryNames = str(pdf_table[i][1])
+
         pdf_table.insert(0, pdf_col)
         sales.sort()
         highest_selling_car = per_car_sale[sales[-1]]
@@ -62,21 +86,15 @@ def process_data():
         summary_car = "The {} had the most sales: {}".format(pdf_table[1][1], pdf_table[1][3])
         mp_year = "The most popular year was {} with {} sales.".format(most_popular_year, amount_of_sales)
 
-        print(summary_string)
-        print(summary_car)
-        print(mp_year)
-        
     subject = 'Sales summary for last month'
     nl = '\n'
     email_text = summary_string + nl + summary_car + nl + mp_year
     br = "<br/>"
     pdf_text= summary_string + br + summary_car + br + mp_year
     att_path = "C:\\Users\\Sebastian Lezama\\GoogleCoursera\\IT Automation\\Text_files\\cars.pdf"
-    reports.generate(att_path, subject, pdf_text, pdf_table)
-    message = emails.generate(sender, recipient, subject, email_text, att_path)
-    emails.send(message)
-
-
+    reports.generate(att_path, subject, pdf_text, pdf_table, report_chart)
+#    message = emails.generate(sender, recipient, subject, email_text, att_path)
+#    emails.send(message)
 
 
 

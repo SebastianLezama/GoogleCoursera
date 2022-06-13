@@ -1,9 +1,10 @@
+from pydoc import pipepager
 from reportlab.platypus import SimpleDocTemplate
 from reportlab.platypus import Paragraph, Spacer, Table, Image
 from reportlab.lib.styles import getSampleStyleSheet
 from reportlab.lib import colors
 
-def generate(filename, title, additional_info, table_data):
+def generate(filename, title, additional_info, table_data, pie_chart):
     styles = getSampleStyleSheet()
     report = SimpleDocTemplate(filename)
     report_title = Paragraph(title, styles["h1"])
@@ -14,4 +15,4 @@ def generate(filename, title, additional_info, table_data):
         ('ALIGN', (0,0), (-1,-1), 'LEFT')]
     report_table = Table(data=table_data, style=table_style, hAlign="LEFT")
     empty_line = Spacer(1,20)
-    report.build([report_title, empty_line, report_info, empty_line, report_table])
+    report.build([report_title, empty_line, report_info, empty_line, report_table, empty_line, pie_chart])
