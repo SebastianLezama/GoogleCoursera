@@ -2,7 +2,6 @@ import json
 import locale
 import sys
 import os
-
 import emails
 import reports
 from operator import itemgetter
@@ -12,7 +11,7 @@ from reportlab.graphics.charts.piecharts import Pie
 
 def load_data(filename):
     """Loads the contents of filename as a JSON file."""
-    with open(filename) as json_file:
+    with open(filename, 'rb') as json_file:
         data = json.load(json_file)
     return data
 
@@ -20,7 +19,7 @@ def load_data(filename):
 def format_car(car):
     """Given a car dictionary, returns a nicely formatted name."""
     return "{} {} ({})".format(
-        car["car_make"], car["car_model"], car["car_year"])
+        car["car_make"], str(car["car_model"]), car["car_year"])
 
 
 def process_data(data):
@@ -46,16 +45,17 @@ def process_data(data):
 
         # TODO: also handle most popular car_year
         car_y = item["car"]["car_year"]
-        year[car_y] = year.get(car_y, 0) + 1
+        year[car_y] = year.get(car_y, 0) + item["total_sales"]
         most_popular_year = max(year, key=year.get)
         mpy_sales = year[most_popular_year]
+
         summary = [
         "The {} generated the most revenue: ${}".format(
             format_car(max_revenue["car"]), str("$"+"{:,.2f}".format(max_revenue["revenue"]))),
         "The {} had the most sales: {}".format(format_car(max_sales["car"]), max_sales["total_sales"]),
         "The most popular year was {} with {} sales.".format(most_popular_year, mpy_sales)
         ]
-
+    print(most_popular_year)
     return summary
 
 
@@ -68,6 +68,7 @@ def cars_dict_to_table(car_data):
     table_data = sorted(table_data, key=itemgetter(3), reverse=True)
     return table_data
 
+
 def cars_table_to_piechart(car_data):
     """Turns table_data to a pie chart."""
     report_pie = Pie(width=3, height=3)
@@ -79,13 +80,14 @@ def cars_table_to_piechart(car_data):
     report_pie.sideLabels = True
     report_pie.simpleLabels = False
     report_pie.x = 120
-    report_pie.y = 70
+    report_pie.y = 60
     for car in car_data:
         report_pie.data.append(car[3])
         report_pie.labels.append(car[1])
     report_chart = Drawing()
     report_chart.add(report_pie)
     return report_chart
+
 
 def make_pdf_report(data, summary, subject, path):
     col = ["ID", "Car", "Price", "Total Sales"]
@@ -97,7 +99,8 @@ def make_pdf_report(data, summary, subject, path):
     pdf_text= summary[0] + br + summary[1] + br + summary[2]
     reports.generate(path, subject, pdf_text, pdf_table, pie_chart)
 
-def send_mail(summary, subject, email_text, att_path):
+
+def send_mail(summary, subject, att_path):
     nl = "\n"
     email_text = summary[0] + nl + summary[1] + nl + summary[2]
     sender = "automation@example.com"
@@ -117,7 +120,7 @@ def main(argv):
     make_pdf_report(data, summary, subject, att_path)
 
     # TODO: send the PDF report as an email attachment
-
+    #send_mail(summary, subject, att_path)
 
 if __name__ == "__main__":
     main(sys.argv)
