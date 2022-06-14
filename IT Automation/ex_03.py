@@ -42,7 +42,7 @@ def process_data():
             car_y = str(car_sale['car']['car_year'])
             year[car_y] = year.get(car_y, 0) + 1
             most_popular_year = max(year, key=year.get)
-            amount_of_sales = year[most_popular_year]
+            mpy_sales = year[most_popular_year]
             pdf_table.append([
                 car_sale['id'], 
                 car_name, 
@@ -69,13 +69,6 @@ def process_data():
         report_chart = Drawing()
         report_chart.add(report_pie)
 
-        # Bar chart
-        print(sales)
-        bar_chart = VerticalBarChart()
-        for i in range(1,11):
-            bar_chart.data.append(sales[i])
-            bar_chart.categoryAxis.categoryNames = str(pdf_table[i][1])
-
         pdf_table.insert(0, pdf_col)
         sales.sort()
         highest_selling_car = per_car_sale[sales[-1]]
@@ -84,7 +77,7 @@ def process_data():
             str("$"+"{:,.2f}".format(sales[-1], 2)))
             )
         summary_car = "The {} had the most sales: {}".format(pdf_table[1][1], pdf_table[1][3])
-        mp_year = "The most popular year was {} with {} sales.".format(most_popular_year, amount_of_sales)
+        mp_year = "The most popular year was {} with {} sales.".format(most_popular_year, mpy_sales)
 
     subject = 'Sales summary for last month'
     nl = '\n'
