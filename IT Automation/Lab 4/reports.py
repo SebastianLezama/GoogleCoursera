@@ -1,12 +1,10 @@
 # generate pdf report
-from numpy import empty
 from run import batch_db_to_web_service
 from reportlab.platypus import SimpleDocTemplate, Paragraph
 from reportlab.lib.styles import getSampleStyleSheet
 
-path = ''
 
-def generate_report(filename, dict, date):
+def generate_report(filename, date, path):
     dict = batch_db_to_web_service(path)
     styles = getSampleStyleSheet()
     report = SimpleDocTemplate(filename)
@@ -14,7 +12,7 @@ def generate_report(filename, dict, date):
     empty_line = '<br/>'
     template = [report_title, empty_line]
     for item in dict:
-        first_line = Paragraph("Name: " + item['name'], styles["BodyText"])
-        second_line = Paragraph("Name: " + item['name'], styles["BodyText"])
+        first_line = Paragraph("name: " + item['name'], styles["BodyText"])
+        second_line = Paragraph("weight: " + item['weight'] + " lbs", styles["BodyText"])
         template.append(first_line, second_line, empty_line)
-        report.build(template)
+    report.build(template)

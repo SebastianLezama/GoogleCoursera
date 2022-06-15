@@ -21,6 +21,7 @@ def batch_db_to_web_service(source):
                     data_dict[keys[index]] = int(lines[index].strip('lbs'))
                     continue
                 data_dict[keys[index]] = lines[index]
+            data_dict[keys[3]] = str(os.path.splitext(file)[0]) + ".jpeg"
     return data_dict
 
 
