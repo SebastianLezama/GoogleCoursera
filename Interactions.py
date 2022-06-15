@@ -1,4 +1,4 @@
-"""
+
 import os
 import datetime
 import re 
@@ -205,7 +205,7 @@ p = {"descripion": "white kitten", "name": "Snowball", "age_months": 6}
 response = requests.post(url, data=p)
 print(response.request.body) # 'description=white+kitten&name=Snowball&age_months=6'
 response = requests.post(url, json=p) # Sends data from dict as JSON
-"""
+
 
 import os
 from email.message import EmailMessage

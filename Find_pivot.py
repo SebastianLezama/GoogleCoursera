@@ -22,12 +22,12 @@ def find_pivot(list):
             return mid
         if list[mid] > list[mid + 1]:
             return mid + 1
-          
+
         # Left side of the array
         if list[right] < list[mid]:
                 # print('A')
                 left = mid + 1
-               
+
         else:
         # Right side of the array
             if list[left] > list[mid]:
