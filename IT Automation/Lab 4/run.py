@@ -21,7 +21,7 @@ def batch_db_to_web_service(source):
                     data_dict[keys[index]] = int(lines[index].strip('lbs'))
                     continue
                 data_dict[keys[index]] = lines[index]
-        post_request(url, data_dict)
+    return data_dict
 
 
 def post_request(url, dict): #
@@ -32,7 +32,8 @@ def post_request(url, dict): #
 
 
 def main():
-    batch_db_to_web_service(path)
+    dict = batch_db_to_web_service(path)
+    post_request(url, dict)
 
 
 if __name__ == '__main__':
