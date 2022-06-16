@@ -127,6 +127,7 @@ print(result.returncode)
 print(result.stdout.decode().split()) # decodes the stdout with u8
 
 # prepare new env and set path var
+# copies env dict and then we can modify it and pass it as a parameter
 
 my_env = os.environ.copy()
 my_env["PATH"] = os.pathsep.join(["/opt/myapp/", my_env['PATH']])
