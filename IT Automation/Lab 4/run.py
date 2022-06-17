@@ -3,16 +3,17 @@ import os
 import requests
 
 
-url = 'https://httpbin.org/post'
-path = 'c:\\Users\\Sebastian Lezama\\GoogleCoursera\\IT Automation\\Text_files\\'
+url_test = 'https://httpbin.org/post'
+url = 'http://[linux-instance-external-IP]/fruits'
+path = '~/supplier-data/descriptions'
 
 
 # Reads file, reads lines and posts requests
 def batch_db_to_web_service(source): 
     os.chdir(source)
     keys = ['name', 'weight', 'description', 'image_name']
+    data = []
     for file in os.listdir(source):
-        print("Filename: " + file)
         data_dict = {}
         with open(file, 'r') as f:
             lines = f.read().splitlines()
@@ -22,19 +23,21 @@ def batch_db_to_web_service(source):
                     continue
                 data_dict[keys[index]] = lines[index]
             data_dict[keys[3]] = str(os.path.splitext(file)[0]) + ".jpeg"
-    return data_dict
+            data.append(data_dict)
+    return data
 
 
-def post_request(url, dict): #
-    resp = requests.post(url, json=dict)
-    print("Status code: " + str(resp.status_code))
-    print("Request body: " + str(resp.request.body))
-    print('-' * 30)
+def post_request(url, list):
+    for dict in list:
+        resp = requests.post(url, json=dict)
+        print("Status code: " + str(resp.status_code))
+        print("Request body: " + str(resp.request.body))
+        print('-' * 30)
 
 
 def main():
-    dict = batch_db_to_web_service(path)
-    post_request(url, dict)
+    list = batch_db_to_web_service(path)
+    post_request(url, list)
 
 
 if __name__ == '__main__':
