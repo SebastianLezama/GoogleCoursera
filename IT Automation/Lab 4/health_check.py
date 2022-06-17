@@ -41,8 +41,11 @@ def check_ram():
 
 
 def email_err(subject):
-        emails.generate_email()
-        emails.send_email()
+    sender = "automation@example.com"
+    to = "{}@example.com".format(os.environ.get('USER'))
+    body = "Please check your system and resolve the issue as soon as possible."
+    emails.generate_email(sender, to, subject, body)
+    emails.send_email()
 
 def main():
     if check_ram():
