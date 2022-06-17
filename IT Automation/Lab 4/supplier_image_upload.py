@@ -3,8 +3,8 @@ import os
 import requests
 
 
-url = ''
-path = ''
+url = 'https://[linux-instance-IP-Address]/upload'
+path = '~/supplier-data/images'
 
 for image in os.listdir(path):
     with open(image, 'rb') as f:

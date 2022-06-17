@@ -2,8 +2,8 @@
 from PIL import Image
 import os
 
-source_path = 'C:\\Users\\Sebastian Lezama\\Pictures\\'
-dest_path = 'C:\\Users\\Sebastian Lezama\\Pictures\\Saved Pictures\\'
+source_path = '~/supplier-data/descriptions/'
+dest_path = '~/supplier-data/images'
 size = (600,400)
 im_format = '.jpeg'
 
