@@ -40,11 +40,23 @@ def check_ram():
     return free_ram < 500
 
 
+def email_err(subject):
+        emails.generate_email()
+        emails.send_email()
+
 def main():
     if check_ram():
-        print('io')
-    #emails.generate_email()
-    #emails.send_email()
+        subject = "Error - Available memory is less than 500MB"
+        email_err(subject)
+    elif check_cpu_usage():
+        subject = "Error - CPU usage is over 80%"
+        email_err(subject)
+    elif check_disk_usage():
+        subject = "Error - Available disk space is less than 20%"
+        email_err(subject)
+    elif check_host():
+        subject = "Error - localhost cannot be resolved to 127.0.0.1"
+        email_err(subject)
 
 
 if __name__ == '__main__':
