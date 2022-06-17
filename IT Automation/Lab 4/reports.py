@@ -4,11 +4,11 @@ from reportlab.platypus import SimpleDocTemplate, Paragraph
 from reportlab.lib.styles import getSampleStyleSheet
 
 
-def generate_report(filename, date, path):
-    dict = batch_db_to_web_service(path)
+def generate_report(filename, title, path_data):
+    dict = batch_db_to_web_service(path_data)
     styles = getSampleStyleSheet()
     report = SimpleDocTemplate(filename)
-    report_title = Paragraph("Processed Update on" + date, styles["h1"])
+    report_title = Paragraph(title, styles["h1"])
     empty_line = '<br/>'
     template = [report_title, empty_line]
     for item in dict:

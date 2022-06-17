@@ -1,11 +1,13 @@
 # email report
 import os
-import datetime
+from datetime import datetime
 import reports
 import emails
 
-date = datetime.datetime.now
-path = ''
+time = str(datetime.now())
+date = "{}".format(time[:10])
+title = "Processed Update on " + date
+path = '~/supplier-data/descriptions/'
 sender = 'automation@example.com'
 to = 'username@example.com'
 subject = 'Upload Completed - Online Fruit Store'
@@ -13,6 +15,6 @@ body = 'All fruits are uploaded to our website successfully. A detailed list is 
 attachment = path + 'processed.pdf'
 
 if __name__ == '__main__':
-    reports.generate_report('processed', date, path)
+    reports.generate_report('/tmp/processed.pdf', title, path)
     message = emails.generate_email(sender, to, subject, body, attachment)
     emails.send_email(message)
