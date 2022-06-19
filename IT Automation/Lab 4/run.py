@@ -1,4 +1,5 @@
 # post json objects to server
+from genericpath import isfile
 import os
 import requests
 
@@ -9,11 +10,13 @@ path = '~/supplier-data/descriptions'
 
 
 # Reads file, reads lines and posts requests
-def batch_db_to_web_service(source): 
+def batch_db_to_web_service(source):
     os.chdir(source)
     keys = ['name', 'weight', 'description', 'image_name']
     data = []
     for file in os.listdir(source):
+        if os.path.splitext(file)[1] != '.txt':
+            continue
         data_dict = {}
         with open(file, 'r') as f:
             lines = f.read().splitlines()
@@ -30,9 +33,7 @@ def batch_db_to_web_service(source):
 def post_request(url, list):
     for dict in list:
         resp = requests.post(url, json=dict)
-        print("Status code: " + str(resp.status_code))
-        print("Request body: " + str(resp.request.body))
-        print('-' * 30)
+        return resp.status_code
 
 
 def main():
