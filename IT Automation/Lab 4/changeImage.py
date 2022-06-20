@@ -7,7 +7,7 @@ dest_path = '~/supplier-data/images'
 size = (600,400)
 im_format = '.jpeg'
 
-def imResizeJpg(source, dest, size, format):
+def image_convert_resize_to_jpg(source, dest, size, format):
     for i in os.listdir(source):
         out_file = str(os.path.splitext(i)[0] + format)
         os.chdir(source)
@@ -32,4 +32,5 @@ def imResizeJpg(source, dest, size, format):
             continue
 
 
-imResizeJpg(source_path, dest_path, size, im_format)
+if __name__ == '__main__':
+    image_convert_resize_to_jpg(source_path, dest_path, size, im_format)

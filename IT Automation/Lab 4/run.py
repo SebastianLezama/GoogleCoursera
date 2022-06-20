@@ -1,16 +1,14 @@
 # post json objects to server
-from genericpath import isfile
 import os
 import requests
 
 
-url_test = 'https://httpbin.org/post'
 url = 'http://[linux-instance-external-IP]/fruits'
 path = '~/supplier-data/descriptions'
 
 
-# Reads file, reads lines and posts requests
-def batch_db_to_web_service(source):
+# Reads txt files, makes list of dicts.
+def batch_db_to_list(source):
     os.chdir(source)
     keys = ['name', 'weight', 'description', 'image_name']
     data = []
@@ -37,7 +35,7 @@ def post_request(url, list):
 
 
 def main():
-    list = batch_db_to_web_service(path)
+    list = batch_db_to_list(path)
     post_request(url, list)
 
 
