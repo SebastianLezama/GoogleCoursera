@@ -1,19 +1,17 @@
 # generate pdf report
-from run import batch_db_to_list
 from reportlab.platypus import SimpleDocTemplate, Paragraph
 from reportlab.lib.styles import getSampleStyleSheet
 
 
-def generate_report(filename, title, path_data):
-    dict = batch_db_to_list(path_data)
+def generate_report(filename, title, paragraph):
     styles = getSampleStyleSheet()
     report = SimpleDocTemplate(filename)
     empty_line = "<br/><br/>"
-    ttle = title + empty_line
-    report_title = Paragraph(ttle, styles["h1"])
+    report_title = Paragraph(title + empty_line, styles["h1"])
     template = [report_title]
-    for item in dict:
-        text = "name: " + item['name'] + "<br/>" + "weight: " + str(item['weight']) + " lbs" + empty_line
+    for item in paragraph:
+        weight = "weight: " + str(item['weight']) + " lbs"
+        text = "name: " + item['name'] + "<br/>" + weight + empty_line
         info = Paragraph(text, styles["BodyText"])
         template.append(info)
     report.build(template)

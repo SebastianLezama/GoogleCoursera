@@ -22,43 +22,45 @@ def check_disk_usage(disk):
 
 def check_cpu_usage():
     """Returns True if cpu usage is greater than 80%"""
-    cpu_percent = psutil.cpu_percent(1)
+    cpu_percent = int(psutil.cpu_percent(1))
     return cpu_percent > 80
 
 
 def check_host():
-    """Returns True if localhost not 127.0.0.1"""
-    result = subprocess.run(["host", "127.0.0.1"], capture_output=True)
+    """Returns True if localhost not in 127.0.0.1"""
+    process = subprocess.run(["host", "127.0.0.1"], capture_output=True)
+    result = process.stdout.decode().split()
     regex = re.search(r"localhost", result[-1])
-    return regex != None
+    return regex == None
 
 
 def check_ram():
-    """Returns True if free RAM is less than 500 MB"""
+    """Returns True if free RAM is less than 500 MB."""
     ram_usage = dict(psutil.virtual_memory()._asdict())
-    free_ram = float("{:.2f}".format(ram_usage['free']/ 1024 / 1024)) 
+    free_ram = float("{:.2f}".format(ram_usage['free']/ 1024 / 1024))
     return free_ram < 500
 
 
 def email_err(subject):
+    """Emails error message."""
     sender = "automation@example.com"
     to = "{}@example.com".format(os.environ.get('USER'))
     body = "Please check your system and resolve the issue as soon as possible."
-    emails.generate_email(sender, to, subject, body)
-    emails.send_email()
+    message = emails.generate_email(sender, to, subject, body)
+    emails.send_email(message)
 
 def main():
-    if check_ram():
-        subject = "Error - Available memory is less than 500MB"
-        email_err(subject)
-    elif check_cpu_usage():
-        subject = "Error - CPU usage is over 80%"
-        email_err(subject)
-    elif check_disk_usage():
+    if check_disk_usage('/'):
         subject = "Error - Available disk space is less than 20%"
         email_err(subject)
-    elif check_host():
+    if check_cpu_usage():
+        subject = "Error - CPU usage is over 80%"
+        email_err(subject)
+    if check_host():
         subject = "Error - localhost cannot be resolved to 127.0.0.1"
+        email_err(subject)
+    if check_ram():
+        subject = "Error - Available memory is less than 500MB"
         email_err(subject)
 
 

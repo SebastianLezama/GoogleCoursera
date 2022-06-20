@@ -1,6 +1,8 @@
 import os
 import sys
 import unittest
+
+from reportlab.platypus import paragraph
 from run import batch_db_to_list, post_request
 from emails import generate_email
 from reports import generate_report
@@ -51,7 +53,8 @@ class TestRun(unittest.TestCase):
     def test_generate_report(self):
         title = "Processed Update on "
         filename = 'C:\\Users\\Sebastian Lezama\\GoogleCoursera\\IT Automation\\Lab 4\\text_files\\processed.pdf'
-        generate_report(filename, title, source)
+        paragraph = batch_db_to_list(source)
+        generate_report(filename, title, paragraph)
         self.assertTrue(os.path.isfile(filename))
 
     def test_convert_image(self):
