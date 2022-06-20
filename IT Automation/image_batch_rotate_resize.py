@@ -7,7 +7,7 @@ size = (640,480)
 rotation = -90
 im_format = '.PNG'
 
-def imRotateResizeJpg(source, dest, size, rotation, format): # Rotates and resizes as PNG
+def image_resize_rotate(source, dest, size, rotation, format): # Rotates and resizes as PNG
     for i in os.listdir(source):
         out_file = str(os.path.splitext(i)[0] + format)
         os.chdir(source)
@@ -33,7 +33,7 @@ def imRotateResizeJpg(source, dest, size, rotation, format): # Rotates and resiz
 
 
 def main():
-    imRotateResizeJpg(source_path, dest_path, size, rotation, im_format)
+    image_resize_rotate(source_path, dest_path, size, rotation, im_format)
 
 
 if __name__ == '__main__':
