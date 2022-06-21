@@ -3,20 +3,19 @@ import os
 import requests
 
 
-url = 'http://[linux-instance-external-IP]/fruits'
-path = '~/supplier-data/descriptions'
+url = 'http://35.225.80.22/fruits/'
+path = 'supplier-data/descriptions/'
 
 
 # Reads txt files, makes list of dicts.
 def batch_db_to_list(source):
-    os.chdir(source)
     keys = ['name', 'weight', 'description', 'image_name']
     data = []
     for file in os.listdir(source):
         if os.path.splitext(file)[1] != '.txt':
             continue
         data_dict = {}
-        with open(file, 'r') as f:
+        with open(source + file, 'r') as f:
             lines = f.read().splitlines()
             for index in range(len(lines)):
                 if index == 1:
@@ -30,8 +29,7 @@ def batch_db_to_list(source):
 
 def post_request(url, list):
     for dict in list:
-        resp = requests.post(url, json=dict)
-        return resp.status_code
+        resp = requests.post(url, data=dict)
 
 
 def main():
