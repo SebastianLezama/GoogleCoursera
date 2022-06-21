@@ -49,6 +49,7 @@ def email_err(subject):
     message = emails.generate_email(sender, to, subject, body)
     emails.send_email(message)
 
+
 def main():
     if check_disk_usage('/'):
         subject = "Error - Available disk space is less than 20%"

@@ -22,6 +22,7 @@ def generate_email(sender, recipient, subject, body, attachment_path=None):
             message.add_attachment(ap.read(), maintype=mime_type, subtype=mime_subtype, filename=attachment_filename)
     return message
 
+
 def send_email(message):
     """Sends the message to the configured SMTP server."""
     mail_server = smtplib.SMTP('localhost')

@@ -2,7 +2,7 @@
 from PIL import Image
 import os
 
-source_path = '~/supplier-data/descriptions/'
+source_path = '~/supplier-data/images'
 dest_path = '~/supplier-data/images'
 size = (600,400)
 im_format = '.jpeg'
