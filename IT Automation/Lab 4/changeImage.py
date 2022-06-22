@@ -11,6 +11,7 @@ im_format = '.jpeg'
 
 def image_convert_resize_to_jpg(source, dest, size, format):
     path = os.getcwd() + source
+    dest_path = os.getcwd() + dest
     for i in os.listdir(path):
         out_file = str(os.path.splitext(i)[0] + format)
         if not os.path.isdir(i):
@@ -19,7 +20,7 @@ def image_convert_resize_to_jpg(source, dest, size, format):
                     print("\nFilename: " + i)
                     with Image.open(path + i) as im:
                         if im.mode != 'RGB':
-                            im.resize(size).convert('RGB').save(dest + out_file)
+                            im.resize(size).convert('RGB').save(dest_path + out_file)
                         else:
                             im.resize(size).save(dest + out_file)
                         print("Saved as: " + dest + out_file)

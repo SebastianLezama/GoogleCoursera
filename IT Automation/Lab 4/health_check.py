@@ -28,9 +28,9 @@ def check_cpu_usage():
 
 def check_host():
     """Returns True if localhost not in 127.0.0.1"""
-    process = subprocess.run(["host", "127.0.0.1"], capture_output=True)
+    process = subprocess.run(["cat", "/etc/hosts"], capture_output=True)
     result = process.stdout.decode().split()
-    regex = re.search(r"localhost", result[-1])
+    regex = re.search(r"localhost", result[0])
     return regex == None
 
 
