@@ -58,7 +58,7 @@ class TestRun(unittest.TestCase):
         self.assertTrue(os.path.isfile(filename))
 
     def test_convert_image(self):
-        source_path = 'C:\\Users\\Sebastian Lezama\\Pictures\\'
+        source_path = '\\Pictures\\'
         dest_path = 'C:\\Users\\Sebastian Lezama\\Pictures\\Saved Pictures\\'
         size = (600,400)
         im_format = '.jpeg'

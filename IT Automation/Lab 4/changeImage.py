@@ -3,34 +3,32 @@ from PIL import Image
 import os
 
 
-source_path = "./"
+source_path = "supplier-data/images/"
 dest_path = "supplier-data/images/"
 size = (600,400)
 im_format = '.jpeg'
 
 
 def image_convert_resize_to_jpg(source, dest, size, format):
-    if os.getcwd() != os.path.abspath(source):
-        os.chdir(source)
-    for i in os.listdir(dest):
+    path = os.getcwd() + source
+    for i in os.listdir(path):
         out_file = str(os.path.splitext(i)[0] + format)
         if not os.path.isdir(i):
             if i != out_file:
                 try:
-                    print("Filename: " + i)
-                    with Image.open(dest + i) as im:
+                    print("\nFilename: " + i)
+                    with Image.open(path + i) as im:
                         if im.mode != 'RGB':
-                            image = im.load()
-                            new_im = Image.new('RGB', size, (255,255,255))
-                            new_im.paste(image, mask=im.split()[3])
-                        new_im.save((dest + out_file), 'JPEG')
+                            im.resize(size).convert('RGB').save(dest + out_file)
+                        else:
+                            im.resize(size).save(dest + out_file)
                         print("Saved as: " + dest + out_file)
                         print('-' * 50)
                 except OSError:
-                    print("Couldn't save file")
+                    print("Couldn't save file: " + out_file)
                     print('-' * 30)
             else:
-                print("File already formated")
+                print(out_file + " already formated")
                 print('-' * 30)
         else:
             continue
