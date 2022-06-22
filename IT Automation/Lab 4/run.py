@@ -28,8 +28,11 @@ def batch_db_to_list(source):
 
 
 def post_request(url, list):
+    r_code = []
     for dict in list:
         resp = requests.post(url, data=dict)
+        r_code.append(resp.status_code)
+    return r_code
 
 
 def main():

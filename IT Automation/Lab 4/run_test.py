@@ -14,7 +14,7 @@ class TestRun(unittest.TestCase):
     def test_post(self):
         url_test = 'https://httpbin.org/post'
         test_case = batch_db_to_list(source)
-        exp_result = 200
+        exp_result = [200, 200]
         post = post_request(url_test, test_case)
         self.assertEqual(post, exp_result)
 
