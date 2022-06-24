@@ -293,3 +293,17 @@ report_chart.add(report_pie)
 
 report.build([report_title, report_table, report_chart])
 
+
+def http_error(status):
+  """equivalent to swith/case"""
+  match status:
+    case 400:
+        return "Bad request"
+    case 404:
+        return "Not found"
+    case 418:
+        return "I'm a teapot"
+
+    # If an exact match is not confirmed, this last case will be used if provided
+    case _:
+        return "Something's wrong with the internet"
