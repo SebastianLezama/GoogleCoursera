@@ -216,3 +216,31 @@ function multiplyAll(arr) {
 }
 
 console.log(multiplyAll([[1,2],[3,4],[5,6,7]]));
+
+// array lookup
+
+let templateArray = [
+    {
+        "firstName": "Kristian",
+        "lastName": "Vos",
+        "number": "49824238",
+        "likes": ["JS", "Gaming"]
+    },
+    {
+        "firstName": "Sherlock",
+        "lastName": "Holmes",
+        "number": "31200389",
+        "likes": ["Python", "CSGO"]
+    }
+];
+
+function lookUp(name, prop) {
+    for (const i of templateArray) {
+        if (i["firstName"] === name) {
+            return i[prop] || "no such property";
+        }
+    }
+    return "no such name";
+}
+
+console.log(lookUp("Sherlock", "lastName"))
