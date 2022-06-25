@@ -167,5 +167,52 @@ function updateTemplate(arr, id, prop, value) {
     return arr;
 }
 
-console.log(templateCopy)
-console.log(updateTemplate(templateCollection, "python", "test", "2022"))
+// console.log(templateCopy)
+// console.log(updateTemplate(templateCollection, "python", "test", "2022"))
+
+// while loops
+
+let x = 0
+let myArray = []
+
+while (x < 5) {
+    myArray.push(x);
+    x++;
+}
+do {
+    myArray.push(x)
+    x++;
+} while (x < 10)
+console.log(myArray)
+
+// for loops
+
+let ourArray = []
+
+for (let i = 1; i < 6; i++) {
+    ourArray.push(i);
+}
+
+for (let i = 10; i >= 6; i--) {
+    ourArray.push(i);
+}
+console.log(ourArray)
+// iteration with clear sintax
+let total = 0
+for (const element of myArray) {
+    total += element;
+}
+console.log(total)
+
+function multiplyAll(arr) {
+    let product = 1;
+
+    for (const i of arr) {
+        for (const j of i) {
+            product *= j;
+        }
+    }
+    return product
+}
+
+console.log(multiplyAll([[1,2],[3,4],[5,6,7]]));
