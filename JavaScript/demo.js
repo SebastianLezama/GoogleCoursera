@@ -44,7 +44,7 @@ let testArr = [1,2,3,4,5];
 
 console.log("Before: " + JSON.stringify(testArr));
 console.log(nextInLine(testArr, 6))
-console.log("Before: " + JSON.stringify(testArr));
+console.log("After: " + JSON.stringify(testArr));
 
 // functions
 
@@ -59,7 +59,7 @@ num--
 // if statements
 // && and operator
 // || or operator
-let value = 8
+let num_value = 8
 
 function trueOrFalse(val) {
     if (val == 8) {
@@ -168,4 +168,4 @@ function updateTemplate(arr, id, prop, value) {
 }
 
 console.log(templateCopy)
-console.log(updateTemplate(templateCollection))
+console.log(updateTemplate(templateCollection, "python", "test", "2022"))
