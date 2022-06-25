@@ -28,6 +28,9 @@ function checkObj(obj, property) {
 }
 
 // arrays
+// declared arrays with const can be mutated with []
+// use Object.freeze() to avoid mutation
+
 let sampleColors = ['red', 'blue'];
 console.log(sampleColors[0]);
 sampleColors.push("green")
@@ -121,7 +124,7 @@ function caseInSwitch(val) {
     return answer
 }
 
-// collections like json,
+// collections like json, objects
 
 let templateCollection = {
     "java": {
@@ -277,3 +280,8 @@ function checkSign(number) {
 }
 
 console.log(checkSign(6))
+
+// arrow functions
+
+const myConcat = (arr1, arr2) => arr1.concat(arr2);
+
