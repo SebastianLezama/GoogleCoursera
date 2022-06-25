@@ -244,3 +244,36 @@ function lookUp(name, prop) {
 }
 
 console.log(lookUp("Sherlock", "lastName"))
+
+// random numbers
+
+let wholeNumber = Math.floor(Math.random() * 10);
+let decimalNumber = Math.random();
+
+console.log(decimalNumber)
+
+// random range
+
+function randomRange(min, max) {
+    return Math.floor(Math.random() * (max - min +1)) + min;
+}
+
+console.log(randomRange(1, 4))
+
+// convert string to integer with parseInt
+
+let stringNumber = "56"
+let stringBinary = "10011"
+
+console.log(parseInt(stringBinary, 2))
+
+// ternary: condition ? if true : if false
+// if nested, start with if statement
+function checkSign(number) {
+    if (number > 0) {
+        return "positive";
+    }
+    return number < 0 ? "negative" : "zero";
+}
+
+console.log(checkSign(6))
