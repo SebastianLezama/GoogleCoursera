@@ -285,3 +285,45 @@ console.log(checkSign(6))
 
 const myConcat = (arr1, arr2) => arr1.concat(arr2);
 
+// rest operator ...
+
+const sum = (function() {
+    return function sum(...args) {
+        return args.reduce((a,b) => a + b, 0);
+    };
+})();
+console.log(sum(3,5,4,8))
+
+// spread operator [...args]
+// to copy an array
+// arr2 = [...arr1]
+
+// destructuring assignment: const { a : b } = of object
+// destructuring nested: const { a : {a2 : b}} = of object
+// destrcuturing to remove items: const [ , , ...arr] = list;
+// destructuring to get prop from object:
+//  function half({ max, min }) { return (max + min) / 2;}
+
+let voxel = {x: 3.6, y: 7.5, z: 6.5};
+
+const { x : a, y : b, z : c } = voxel;
+console.log(a)
+
+// template literals
+
+const greeting = `Hello, my name is ${person.name}!
+I am ${person.age} years old.`;
+
+console.log(greeting);
+
+// iterating to template literals
+
+function makeList(arr) {
+    const result = []
+    for (const i of arr) { 
+        result.push(`<li class="text-warning">${i["firstName"]}`)
+    }
+    return result
+    }
+
+console.log(makeList(templateArray))
