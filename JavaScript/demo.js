@@ -366,5 +366,7 @@ temp = thermos.temperature;
 console.log(temp)
 
 // import statement: import { function } from "./filename(.js)"
-// declare export function
-
+// declare export function and variables
+// also: import * as newObjectName from "./filename(.js)"
+// export default
+// import function from "./filename(.js)"
