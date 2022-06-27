@@ -321,9 +321,50 @@ console.log(greeting);
 function makeList(arr) {
     const result = []
     for (const i of arr) { 
-        result.push(`<li class="text-warning">${i["firstName"]}`)
+        result.push(`<li class="text-warning">${i["firstName"]}</li>`)
     }
     return result
     }
 
 console.log(makeList(templateArray))
+
+// object literals
+// to create an object and asign properties
+const createPerson = (name, age, gender) => ( { name, age, gender});
+
+// class syntax
+
+class SpaceShuttle {
+    constructor(targetPlanet) {
+    this.targetPlanet = targetPlanet;
+    }
+}
+let zeus = new SpaceShuttle('Jupiter');
+console.log(zeus.targetPlanet)
+
+function makeClass() {
+    class Thermostat {
+        constructor(temp) {
+            this._temp = 5/9 * (temp - 32);
+        }
+        get temperature() {
+            return this._temp;
+        }
+        set temperature(updatedTemp) {
+            this._temp = updatedTemp;
+        }
+    }
+    return Thermostat
+}
+
+const Thermostat = makeClass();
+const thermos = new Thermostat(76);
+let temp = thermos.temperature;
+console.log(temp)
+thermos.temperature = 10;
+temp = thermos.temperature;
+console.log(temp)
+
+// import statement: import { function } from "./filename(.js)"
+// declare export function
+
