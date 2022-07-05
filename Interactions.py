@@ -49,6 +49,9 @@ def new_directory(directory, filename):
 
 print(new_directory("PythonPrograms", "script.py"))
 
+# relative paths 'file.py' starts at current folder
+# absolute paths '/file.py' starts at root folder
+
 os.remove('script.py')
 os.chdir('../')
 os.chdir('GoogleCoursera')
