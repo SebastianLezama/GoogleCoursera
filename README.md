@@ -15,7 +15,7 @@
 
 - [Courses](#quick-start)
 - [Status](#status)
-- [What's included](#whats-included)
+- [Certificate](#certificate)
 
 ## Courses
 
@@ -27,21 +27,10 @@
 
 ## Status
 
-Finished
+Finished!
 
-## What's included
+## Certificate
 
-Some text
-
-```text
-folder1/
-└── folder2/
-    ├── folder3/
-    │   ├── file1
-    │   └── file2
-    └── folder4/
-        ├── file3
-        └── file4
-```
+· <a href="https://www.coursera.org/account/accomplishments/verify/HHFHRCBXCU7F?utm_source=link&utm_medium=certificate&utm_content=cert_image&utm_campaign=sharing_cta&utm_product=course" >View Certificate</a> ·
 
 Enjoy :metal:
